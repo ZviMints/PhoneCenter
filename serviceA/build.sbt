@@ -14,7 +14,7 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3
 libraryDependencies += "org.reactivemongo" %% "play2-reactivemongo" % "0.18.8-play27"
 
 // Kafka
-libraryDependencies +=   "com.typesafe.akka" %% "akka-stream-kafka" % "2.0.4"
+libraryDependencies += "org.apache.kafka" %% "kafka" % "2.1.0"
 
 // Cache
 libraryDependencies += "com.typesafe.play" %% "play-cache" % "2.7.2"
@@ -24,4 +24,10 @@ libraryDependencies += "com.github.karelcemus" %% "play-redis" % "2.4.0"
 libraryDependencies += "io.kamon" %% "kamon-scala" % "0.6.7"
 libraryDependencies += "io.kamon" %% "kamon-play-2.6" % "0.6.8"
 libraryDependencies += "io.kamon" %% "kamon-datadog" % "0.6.8"
+
+// Logging
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
+
+
 

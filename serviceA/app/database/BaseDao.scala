@@ -1,12 +1,13 @@
 package database
 
-import javax.inject.{Inject, Singleton}
+import javax.inject.Inject
 import play.api.libs.json.{Json, OFormat}
 import reactivemongo.api.commands.{DefaultWriteResult, MultiBulkWriteResult, WriteResult}
 import reactivemongo.api.{Cursor, WriteConcern}
 import reactivemongo.play.json.ImplicitBSONHandlers
 import reactivemongo.play.json.JSONSerializationPack.{Document, _}
 import reactivemongo.play.json.collection.JSONCollection
+
 import scala.concurrent.{ExecutionContext, Future}
 
 

@@ -1,9 +1,8 @@
-package com.vatbox.deadsea.common
+package metrics
 
 import kamon.Kamon
 import kamon.metric.instrument.Counter
 
-/** Zvi Mints - zvi.mints@vatbox.com */
 object Metrics {
 
   /* Healthcheck */
