@@ -49,7 +49,7 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
           _ <- cache.set("key", call, expiration)
           _ <- cache.get[Call]("key").map { v =>
             logger.warn(s"Cache data for key: key, value: $v")
-            // _ <- do WS to serviceC that will now make new dashboard
+            // _ <- do WS to serviceC that will now make new dashboard or gatherMetrics with dashboardService: DashboardService
           }
         } yield ()
       }
