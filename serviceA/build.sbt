@@ -29,5 +29,10 @@ libraryDependencies += "io.kamon" %% "kamon-datadog" % "0.6.8"
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 
+// Json
+
+libraryDependencies += "com.beachape" %% "enumeratum" % "1.5.12"
+libraryDependencies += "com.beachape" %% "enumeratum-play-json" % "1.5.12"
+
 
 

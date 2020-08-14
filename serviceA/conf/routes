@@ -1,8 +1,12 @@
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET     /                                            controllers.ServiceAController.index()
-GET     /totalWaitingCalls                           controllers.ServiceAController.totalWaitingCalls()
-POST     /callDetails                                  controllers.ServiceAController.callDetails()
+GET         /                         controllers.ServiceAController.index()
+GET         /totalWaitingCalls        controllers.ServiceAController.totalWaitingCalls()
+POST        /callDetails              controllers.ServiceAController.callDetails()
+
+#  ============================================= For DEBUG ============================================
+POST        /write                    controllers.ServiceAController.write()
+GET         /read                     controllers.ServiceAController.read()

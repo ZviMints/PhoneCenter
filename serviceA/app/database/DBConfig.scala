@@ -16,6 +16,13 @@ class DBConfig @Inject()(conf: Configuration,
                         (implicit val ec: ExecutionContext) {
   private[database] val callsCollection = for {
     collection <- mongoApi.database.map(_.collection[JSONCollection](conf.get[String]("mongodb.collections.calls")))
+    // For fetchByStatus
+    _ <- collection.indexesManager.ensure(
+      Index(Seq(
+        (Call.Status, IndexType.Ascending),
+        (Call.LockedTime, IndexType.Ascending)),
+        name = Some("status_lockedTime"),
+        background = true))
   } yield collection
 
   val calls = Await.result(callsCollection, Duration.Inf)
