@@ -67,7 +67,7 @@ class KafkaProduceMonitor @Inject()(callService: CallService,
       case Some(call) => {
         logger.warn("[KafkaProduceMonitor] - fetched some call in status InProgress")
         kafkaService.writeToKafka(call)
-        logger.warn("Call successfully sent to Kafka!")
+        logger.warn("Call Successfully sent to Kafka!")
         callService.syncUpdate(call._id).map(_.get)
         }.recover { case ex: Exception => errorHandler(call, ex, "IN-PROGRESS-GENERAL-ERROR")}
       case None => logger.debug(s"Not found call for sync or there is already other process inProgress, next check in $TickInterval")

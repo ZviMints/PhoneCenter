@@ -2,19 +2,21 @@ package services
 
 import java.time.Instant
 
-import com.google.inject.Inject
 import com.typesafe.scalalogging.LazyLogging
-import database.{DuplicationError, CallDao, ManyDuplicationsError}
+import database.{CallDao, DuplicationError, ManyDuplicationsError}
+import javax.inject.{Inject,Singleton}
 import model.Status.Done
-import model.{Status, Call}
+import model.{Call, Status}
 import play.api.Configuration
 import play.api.libs.json.{JsResultException, Json}
 import reactivemongo.bson.BSONObjectID
 import reactivemongo.play.json.ImplicitBSONHandlers._
 import serializers.CallSerializer._
+
 import scala.concurrent.{ExecutionContext, Future}
 
-class CallService @Inject()(callDao: CallDao)(implicit ec :ExecutionContext) extends LazyLogging {
+@Singleton
+class CallService @Inject()(callDao: CallDao)(implicit ec: ExecutionContext) extends LazyLogging {
 
   def updateStatus(callId: BSONObjectID, status: Status): Future[Option[Call]] = {
     callDao.findAndUpdate(Json.obj("$and" -> List(

@@ -40,7 +40,7 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
   override def receive: Receive = myReceive.orElse(super.receive)
 
   def consumeFromKafka() = {
-    kafkaService.consumeFromKafka() match {
+    kafkaService.consumeFromKafka match {
       case Nil => { logger.warn("[KafkaConsumeMonitor] - There NO messages available in Kafka") }
       case calls =>
         logger.warn(s"[KafkaConsumeMonitor] - consumed messages from Kafka with calls = $calls")
