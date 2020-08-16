@@ -31,9 +31,17 @@ class ServiceAController @Inject()(val cc: ControllerComponents,
       case JsSuccess(call, _) => callDao.insertOne(Call(call)).map(_ => Ok).recover {
         case ex: Exception => handlerError(s"Failure occurred on callDetails with ex: ${ex.getMessage}")
       }
-      case JsError(error) => Future.successful(BadRequest(Json.toJson("error" -> s"Bad rules format: ${error.mkString}")))
+      case JsError(error) => Future.successful(BadRequest(Json.toJson("error" -> s"Bad call format: ${error.mkString}")))
     }
   }
+
+  //todo: totalWaitingCalls()
+  //todo: redesign javascript of yossi
+
+  // 1. todo -> send and recive kafka messages
+  // how to test:
+  // 2. remove write and read routes from controller and and
+  // 3. js yossi -> /callDetails
 
   def totalWaitingCalls() = Action.async { implicit request =>
     //todo: To understand what this routes does and do it

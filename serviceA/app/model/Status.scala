@@ -13,9 +13,7 @@ object Status extends Enum[Status] with PlayJsonEnum[Status] {
 
   case object InProgress extends Status
 
-  case object Done extends Status
-
-  case object Failure extends Status
+  case object Sent extends Status
 
   override def values: immutable.IndexedSeq[Status] = findValues
 }

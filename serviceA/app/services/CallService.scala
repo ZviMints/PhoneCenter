@@ -5,7 +5,7 @@ import java.time.Instant
 import com.typesafe.scalalogging.LazyLogging
 import database.{CallDao, DuplicationError, ManyDuplicationsError}
 import javax.inject.{Inject,Singleton}
-import model.Status.Done
+import model.Status.Sent
 import model.{Call, Status}
 import play.api.Configuration
 import play.api.libs.json.{JsResultException, Json}
@@ -33,7 +33,7 @@ class CallService @Inject()(callDao: CallDao)(implicit ec: ExecutionContext) ext
     callDao.findAndUpdate(Json.obj(s"${Call.ID}" -> callId),
       Json.obj("$set" -> Json.obj(
         s"${Call.SyncAt}" -> Instant.now(),
-        s"${Call.Status}" -> Done)))
+        s"${Call.Status}" -> Sent)))
   }
 
   def fetchByStatus(source: Status, lockTTL: Long): Future[Option[Call]] = {

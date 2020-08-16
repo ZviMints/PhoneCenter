@@ -4,6 +4,7 @@ import actors.KafkaConsumeMonitor.ConsumeFromKafka
 import akka.Done
 import com.google.inject.Inject
 import database.CallDao
+import metrics.Metrics
 import model.Call
 import play.api.Configuration
 import play.api.cache.AsyncCacheApi
