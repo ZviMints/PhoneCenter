@@ -41,7 +41,6 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
   override def receive: Receive = myReceive.orElse(super.receive)
 
   def consumeFromKafka() = {
-    Metrics.applicationStartedCounter.increment()
     kafkaService.consumeFromKafka { (call: Call) => {
       logger.warn(s"Consumed Call from Kafka: \n ${Json.prettyPrint(Json.toJson(call))}")
       for {

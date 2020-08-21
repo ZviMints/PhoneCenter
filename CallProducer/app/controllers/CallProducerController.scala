@@ -15,6 +15,8 @@ class CallProducerController @Inject()(val cc: ControllerComponents,
                                        eventDao: EventDao)(implicit ec: ExecutionContext) extends AbstractController(cc) with LazyLogging with ControllerErrorHandling {
 
   // sbt runProd -Dhttp.port=8080
+  // datadog-agent start
+
   def index(): Action[AnyContent] = Action {
     Ok(views.html.main("CallProducer"))
   }

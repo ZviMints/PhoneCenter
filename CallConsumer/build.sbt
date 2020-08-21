@@ -1,4 +1,4 @@
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, JavaAgent)
 
 name := """CallConsumer"""
 organization := "ariel.university"
@@ -18,9 +18,8 @@ libraryDependencies += "com.typesafe.play" %% "play-cache" % "2.7.2"
 libraryDependencies += "com.github.karelcemus" %% "play-redis" % "2.4.0"
 
 // Kamon
-libraryDependencies += "io.kamon" %% "kamon-scala" % "0.6.7"
-libraryDependencies += "io.kamon" %% "kamon-play-2.6" % "0.6.8"
-libraryDependencies += "io.kamon" %% "kamon-datadog" % "0.6.8"
+libraryDependencies += "io.kamon" %% "kamon-bundle" % "2.1.0"
+libraryDependencies += "io.kamon" %% "kamon-apm-reporter" % "2.1.0"
 
 // Logging
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"

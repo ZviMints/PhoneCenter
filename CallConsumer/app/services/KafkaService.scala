@@ -26,7 +26,7 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
     props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("auto.offset.reset", "latest")
-    props.put("group.id", "consumer-group-id")
+    props.put("group.id", "consumer_group_id")
     val consumer: KafkaConsumer[String, String] = new KafkaConsumer[String, String](props)
     consumer.subscribe(util.Arrays.asList(topic))
     try {

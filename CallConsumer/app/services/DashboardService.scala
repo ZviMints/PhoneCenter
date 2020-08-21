@@ -11,7 +11,7 @@ class DashboardService @Inject()(implicit val ec: ExecutionContext)  {
     graph3()
   }
 
-  private[services] def graph1() = Metrics.gotMessageCounter.increment() // Some graph
-  private[services] def graph2() = Metrics.gotMessageCounter.increment() // Some graph
-  private[services] def graph3() = Metrics.gotMessageCounter.increment() // Some graph
+  private[services] def graph1() = Metrics.CallReceivedCounter.increment() // Some graph
+  private[services] def graph2() = Metrics.CallReceivedCounter.increment() // Some graph
+  private[services] def graph3() = Metrics.CallReceivedCounter.increment() // Some graph
 }
