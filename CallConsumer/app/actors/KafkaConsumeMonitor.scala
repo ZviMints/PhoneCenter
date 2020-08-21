@@ -45,7 +45,7 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
       logger.warn(s"Consumed Call from Kafka: \n ${Json.prettyPrint(Json.toJson(call))}")
       for {
         _ <- cache.set("key", call, expiration)
-      } yield dashboardService.update()
+      } yield dashboardService.update(call)
     }
     }
   }

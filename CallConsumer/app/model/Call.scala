@@ -1,8 +1,5 @@
 package model
 
-
-
-
 case class Call( startTime: String,
                  city: String,
                  topic: String,
