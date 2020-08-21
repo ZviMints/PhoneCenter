@@ -5,6 +5,7 @@ import model.Event
 import play.api.libs.json.OFormat
 import reactivemongo.play.json.collection.JSONCollection
 import serializers.EventSerializer
+import serializers.CommonSerializers.InstantSerializers.BSONFormat
 
 import scala.concurrent.ExecutionContext
 
@@ -12,5 +13,5 @@ import scala.concurrent.ExecutionContext
 case class EventDao @Inject()(DBConfig: DBConfig)(implicit ec: ExecutionContext) extends BaseDao {
   override type Entity = Event
   override implicit val OFormat: OFormat[Event] = EventSerializer.EventFormat
-  override def collection: JSONCollection = DBConfig.calls
+  override def collection: JSONCollection = DBConfig.events
 }

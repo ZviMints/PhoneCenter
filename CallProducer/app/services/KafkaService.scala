@@ -16,7 +16,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionContext) extends LazyLogging {
 
-  val topic = conf.get[String]("callProducer.kafka.topic")
+  val topic = conf.get[String]("CallProducer.kafka.topic")
 
   def writeToKafka(call: Call) = {
     Future {

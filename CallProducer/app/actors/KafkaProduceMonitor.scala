@@ -14,12 +14,12 @@ object KafkaProduceMonitor {
   case object CheckInReady
   case object CheckInProgress
 }
+
 class KafkaProduceMonitor @Inject()(eventService: EventService,
                                     kafkaService: KafkaService,
                                     conf: Configuration)(implicit val ec: ExecutionContext) extends MonitorActor {
 
 
-  val expiration: FiniteDuration = conf.get[FiniteDuration]("CallProducer.cache.expiration")
   lazy val lockTTLReady = conf.get[FiniteDuration]("CallProducer.lockTTL.ready").toMillis
   lazy val lockTTLInProgress = conf.get[FiniteDuration]("CallProducer.lockTTL.inProgress").toMillis
   override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("CallProducer.producer-actor.initial_delay")

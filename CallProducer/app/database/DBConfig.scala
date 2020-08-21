@@ -25,5 +25,5 @@ class DBConfig @Inject()(conf: Configuration,
         background = true))
   } yield collection
 
-  val calls = Await.result(eventsCollection, Duration.Inf)
+  val events = Await.result(eventsCollection, Duration.Inf)
 }

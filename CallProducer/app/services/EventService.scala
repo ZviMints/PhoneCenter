@@ -3,13 +3,16 @@ package services
 import java.time.Instant
 
 import com.typesafe.scalalogging.LazyLogging
-import database.EventDao
-import javax.inject.{Inject, Singleton}
+import database.{EventDao, DuplicationError, ManyDuplicationsError}
+import javax.inject.{Inject,Singleton}
 import model.Status.Sent
 import model.{Event, Status}
+import play.api.Configuration
 import play.api.libs.json.{JsResultException, Json}
 import reactivemongo.bson.BSONObjectID
 import reactivemongo.play.json.ImplicitBSONHandlers._
+import serializers.CommonSerializers.InstantSerializers
+import serializers.EventSerializer._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -35,8 +38,8 @@ class EventService @Inject()(eventDao: EventDao)(implicit ec: ExecutionContext) 
   }
 
   def fetchByStatus(source: Status, lockTTL: Long): Future[Option[Event]] = {
-    eventDao.findAndUpdate(Json.obj("$and" -> List(
-      notLocked(Instant.now), Json.obj(s"${Event.Status}" -> source))),
+    val query = Json.obj("$and" -> List(notLocked(Instant.now), Json.obj(s"${Event.Status}" -> source)))
+    eventDao.findAndUpdate(query,
       Json.obj("$set" -> Json.obj(s"${Event.LockedTime}" -> Instant.now.plusMillis(lockTTL))))
   }
 

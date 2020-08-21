@@ -14,13 +14,12 @@ import scala.concurrent.{ExecutionContext, Future}
 class CallProducerController @Inject()(val cc: ControllerComponents,
                                        eventDao: EventDao)(implicit ec: ExecutionContext) extends AbstractController(cc) with LazyLogging with ControllerErrorHandling {
 
-  // sbt run -Dhttp.port=8080
+  // sbt runProd -Dhttp.port=8080
   def index(): Action[AnyContent] = Action {
-    Ok(views.html.main("Welcome"))
+    Ok(views.html.main("CallProducer"))
   }
 
   def send() = Action.async(parse.json) { implicit request =>
-    logger.warn(s"[CallProducerController] - Got /send request with request.body = ${request.body}")
     request.body.validate[Call] match {
       case JsSuccess(call, _) => eventDao.insertOne(Event(call)).map(_ => Ok).recover {
         case ex: Exception => handlerError(s"Failure occurred on callDetails with ex: ${ex.getMessage}")
