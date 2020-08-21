@@ -21,7 +21,7 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
 
   val topic = conf.get[String]("CallProducer.kafka.topic")
 
-  def writeToKafka(call: Call) = {
+  def writeCallToKafka(call: Call) = {
     val props = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
     props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
@@ -29,6 +29,16 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
     val producer = new KafkaProducer[String, String](props)
     val value = Json.stringify(Json.toJson(call))
     val record = new ProducerRecord[String, String](topic, "key", value)
+    producer.send(record)
+    producer.close()
+  }
+  def writeNumberToKafka(totalWaitingCalls: Int) = {
+    val props = new Properties()
+    props.put("bootstrap.servers", "localhost:9092")
+    props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+    props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+    val producer = new KafkaProducer[String, String](props)
+    val record = new ProducerRecord[String, String](topic, "key", totalWaitingCalls.toString)
     producer.send(record)
     producer.close()
   }

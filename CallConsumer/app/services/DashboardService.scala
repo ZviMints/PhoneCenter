@@ -9,10 +9,21 @@ import scala.concurrent.{ExecutionContext, Future}
 class DashboardService @Inject()(implicit val ec: ExecutionContext)  {
   def update(call: Call) = {
     received()
+    balance(true, 1)
     graphByCity(call.city)
     graphByTopic(call.topic)
     graphByGender(call.gender)
     graphByLanguage(call.language)
+  }
+
+  def update(totalWaitingCalls: Int) = {
+    balance(false, totalWaitingCalls)
+  }
+
+  // Showing rangeSampler for (+) number of calls that answers and (-) for number of waiting calls
+  private[services] def balance(inc: Boolean, amount: Int) = inc match {
+    case true =>  Metrics.CallsBalanceRangeSampler.increment(amount)
+    case false =>  Metrics.CallsBalanceRangeSampler.decrement(amount)
   }
 
   // Showing all the calls that received from kafka

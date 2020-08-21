@@ -8,10 +8,12 @@ import model.Event
 import play.api.libs.json.{JsError, JsSuccess, Json}
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import serializers.CallSerializer._
+import services.KafkaService
 
 import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class CallProducerController @Inject()(val cc: ControllerComponents,
+                                       kafkaService: KafkaService,
                                        eventDao: EventDao)(implicit ec: ExecutionContext) extends AbstractController(cc) with LazyLogging with ControllerErrorHandling {
 
   // sbt runProd -Dhttp.port=8080
@@ -30,5 +32,11 @@ class CallProducerController @Inject()(val cc: ControllerComponents,
       }
       case JsError(error) => Future.successful(BadRequest(Json.toJson("error" -> s"Bad call format: ${error.mkString}")))
     }
+  }
+
+  def totalWaitingCalls(totalWaitingCalls: Int) = Action { implicit request =>
+    logger.warn(s"[CallProducerController] - got /totalWaitingCalls request with CallProducerController = ${totalWaitingCalls}")
+    kafkaService.writeNumberToKafka(totalWaitingCalls)
+    Ok(s"$totalWaitingCalls Monitor count sent to Kafka successfully")
   }
 }

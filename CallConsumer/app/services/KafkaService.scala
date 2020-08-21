@@ -12,14 +12,16 @@ import play.api.Configuration
 import play.api.libs.json.Json
 import serializers.CallSerializer.CallFormat
 
+import scala.Int
 import scala.collection.JavaConverters._
+import scala.collection.immutable.Range.Int
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionContext) extends LazyLogging {
   val topic = conf.get[String]("CallConsumer.kafka.topic")
 
-  def consumeFromKafka(operation: Call => Future[Unit]) = {
+  def consumeFromKafka[T,R](callOperation: Call => Future[T], monitorOperation: Int => R) = {
     logger.warn("Consuming from Kafka...")
     val props = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
@@ -34,8 +36,14 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
         val records = consumer.poll(1000).asScala.toList
         for (data <- records) {
           val value = data.value()
-          val call = Json.parse(value).as[Call]
-          operation(call)
+          // its not type-safe, just for demo.
+          value match {
+            case _ if value.matches("[+-]?\\d+")  => {
+              val totalWaitingCalls = Integer.parseInt(value)
+              monitorOperation(totalWaitingCalls)
+            }
+            case call => callOperation(Json.parse(call).as[Call])
+          }
         }
       }
     } finally consumer.close()

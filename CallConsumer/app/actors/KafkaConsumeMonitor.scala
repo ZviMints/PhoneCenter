@@ -41,12 +41,18 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
   override def receive: Receive = myReceive.orElse(super.receive)
 
   def consumeFromKafka() = {
-    kafkaService.consumeFromKafka { (call: Call) => {
+
+  }
+    val callOperation = (call: Call) => {
       logger.warn(s"Consumed Call from Kafka: \n ${Json.prettyPrint(Json.toJson(call))}")
       for {
         _ <- cache.set("key", call, expiration)
       } yield dashboardService.update(call)
     }
+    val monitorOperation = (totalWaitingCalls: Int) => {
+      logger.warn(s"Consumed totalWaitingCalls Count from Kafka: $totalWaitingCalls")
+      dashboardService.update(totalWaitingCalls)
     }
-  }
+
+    kafkaService.consumeFromKafka(callOperation,monitorOperation)
 }

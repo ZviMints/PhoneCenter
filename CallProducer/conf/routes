@@ -1,8 +1,9 @@
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET         /                    controllers.CallProducerController.index()
-POST        /send                controllers.CallProducerController.send()
+GET         /                         controllers.CallProducerController.index()
+POST        /send                     controllers.CallProducerController.send()
+PUT         /totalWaitingCalls        controllers.CallProducerController.totalWaitingCalls(totalWaitingCalls: Int)
 

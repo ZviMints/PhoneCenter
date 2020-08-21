@@ -59,7 +59,7 @@ class KafkaProduceMonitor @Inject()(eventService: EventService,
     eventService.fetchByStatus(InProgress, lockTTLInProgress).foreach {
       case Some(event) => {
         logger.warn("[KafkaProduceMonitor] - fetched InProgress Event")
-        kafkaService.writeToKafka(event.content)
+        kafkaService.writeCallToKafka(event.content)
         logger.warn("Call Successfully sent to Kafka!")
         eventService.syncUpdate(event._id).map(_.get)
         }.recover { case ex: Exception => errorHandler(event, ex, "IN-PROGRESS-GENERAL-ERROR")}
