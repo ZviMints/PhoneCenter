@@ -19,7 +19,7 @@ class DashboardService @Inject()(implicit val ec: ExecutionContext)  {
   private[services] def received() = Metrics.CallReceivedCounter.increment()
 
   // Showing graph for calls by city
-  private[services] def graphByCity(city: String) = Metrics.GraphByCity(city).record()
+  private[services] def graphByCity(city: String) = Metrics.GraphByCity(city).increment()
 
   // Showing graph for calls by topic
   private[services] def graphByTopic(topic: String) = Metrics.GraphByTopic(topic).increment()
