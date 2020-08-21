@@ -3,11 +3,8 @@ package model
 import java.time.Instant
 
 import dto.Call
-import enumeratum.{Enum, EnumEntry, PlayJsonEnum}
 import model.Status.Ready
 import reactivemongo.bson.BSONObjectID
-
-import scala.collection.immutable
 
 
 case class Event(

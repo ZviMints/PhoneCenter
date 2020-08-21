@@ -1,15 +1,10 @@
 package actors
 
-import actors.KafkaConsumeMonitor.ConsumeFromKafka
 import actors.KafkaProduceMonitor.{CheckInProgress, CheckInReady}
 import com.google.inject.Inject
-import database.EventDao
-import dto.Call
-import model.Status.{InProgress, Ready}
 import model.Event
+import model.Status.{InProgress, Ready}
 import play.api.Configuration
-import play.api.cache.AsyncCacheApi
-import play.cache.NamedCache
 import services.{EventService, KafkaService}
 
 import scala.concurrent.ExecutionContext
@@ -24,11 +19,11 @@ class KafkaProduceMonitor @Inject()(eventService: EventService,
                                     conf: Configuration)(implicit val ec: ExecutionContext) extends MonitorActor {
 
 
-  val expiration: FiniteDuration = conf.get[FiniteDuration]("CallsProducer.cache.expiration")
-  lazy val lockTTLReady = conf.get[FiniteDuration]("CallsProducer.lockTTL.ready").toMillis
-  lazy val lockTTLInProgress = conf.get[FiniteDuration]("CallsProducer.lockTTL.inProgress").toMillis
-  override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("CallsProducer.producer-actor.initial_delay")
-  override protected def TickInterval: FiniteDuration = conf.get[FiniteDuration]("CallsProducer.producer-actor.tick_interval")
+  val expiration: FiniteDuration = conf.get[FiniteDuration]("CallProducer.cache.expiration")
+  lazy val lockTTLReady = conf.get[FiniteDuration]("CallProducer.lockTTL.ready").toMillis
+  lazy val lockTTLInProgress = conf.get[FiniteDuration]("CallProducer.lockTTL.inProgress").toMillis
+  override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("CallProducer.producer-actor.initial_delay")
+  override protected def TickInterval: FiniteDuration = conf.get[FiniteDuration]("CallProducer.producer-actor.tick_interval")
 
   override protected def onTick(): Unit = {
     self ! CheckInReady
@@ -62,13 +57,13 @@ class KafkaProduceMonitor @Inject()(eventService: EventService,
 
   def onCheckInProgress() = {
     eventService.fetchByStatus(InProgress, lockTTLInProgress).foreach {
-      case Some(doc) => {
+      case Some(event) => {
         logger.warn("[KafkaProduceMonitor] - fetched some doc in status InProgress")
-        kafkaService.writeToKafka(doc.content)
+        kafkaService.writeToKafka(event.content)
         logger.warn("Call Successfully sent to Kafka!")
-        eventService.syncUpdate(doc._id).map(_.get)
-        }.recover { case ex: Exception => errorHandler(doc, ex, "IN-PROGRESS-GENERAL-ERROR")}
-      case None => logger.debug(s"Not found doc for sync or there is already other process inProgress, next check in $TickInterval")
+        eventService.syncUpdate(event._id).map(_.get)
+        }.recover { case ex: Exception => errorHandler(event, ex, "IN-PROGRESS-GENERAL-ERROR")}
+      case None => logger.debug(s"Not found event for sync or there is already other process inProgress, next check in $TickInterval")
     }
   }
 

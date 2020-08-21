@@ -1,7 +1,6 @@
 package model
 
 import enumeratum.{Enum, EnumEntry, PlayJsonEnum}
-import model.Status.findValues
 
 import scala.collection.immutable
 

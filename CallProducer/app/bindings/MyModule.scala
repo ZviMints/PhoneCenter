@@ -1,7 +1,7 @@
 package bindings
+import actors.KafkaProduceMonitor
 import com.google.inject.AbstractModule
 import play.api.libs.concurrent.AkkaGuiceSupport
-import actors.{KafkaProduceMonitor}
 
 class MyModule extends AbstractModule with AkkaGuiceSupport {
   override def configure = {

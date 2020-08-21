@@ -1,7 +1,6 @@
 package actors
 
 import actors.KafkaConsumeMonitor.ConsumeFromKafka
-import akka.Done
 import com.google.inject.Inject
 import metrics.Metrics
 import model.Call
@@ -10,8 +9,8 @@ import play.api.cache.AsyncCacheApi
 import play.cache.NamedCache
 import services.KafkaService
 
+import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.FiniteDuration
-import scala.concurrent.{ExecutionContext, Future}
 
 object KafkaConsumeMonitor {
   case object ConsumeFromKafka
@@ -20,14 +19,14 @@ object KafkaConsumeMonitor {
 
 class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
                                     conf: Configuration,
-                                    @NamedCache("serviceA") cache: AsyncCacheApi)(implicit val ec: ExecutionContext) extends MonitorActor {
+                                    @NamedCache("CallConsumer") cache: AsyncCacheApi)(implicit val ec: ExecutionContext) extends MonitorActor {
 
 
-  val expiration: FiniteDuration = conf.get[FiniteDuration]("serviceA.cache.expiration")
+  val expiration: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.cache.expiration")
 
-  override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("serviceA.consumer-actor.initial_delay")
+  override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.consumer-actor.initial_delay")
 
-  override protected def TickInterval: FiniteDuration = conf.get[FiniteDuration]("serviceA.consumer-actor.tick_interval")
+  override protected def TickInterval: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.consumer-actor.tick_interval")
 
   override protected def onTick(): Unit = {
     self ! ConsumeFromKafka

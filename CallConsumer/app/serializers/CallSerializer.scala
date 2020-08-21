@@ -1,9 +1,8 @@
 package serializers
 
-import dto.Call
-import model.Event
+import model.Call
 import play.api.libs.json.{Json, OFormat}
 
-object CallDtoSerializer {
+object CallSerializer {
   implicit val CallFormat: OFormat[Call] = Json.format[Call]
 }

@@ -1,23 +1,16 @@
 package services
 
 
-import java.time.Duration
-
-import javax.inject.{Inject, Singleton}
-import model.Event
-import play.api.libs.json.Json
-import serializers.EventSerializer._
-import com.typesafe.scalalogging.LazyLogging
-import play.api.Configuration
-import org.apache.kafka.clients.producer._
-import java.util
-
-import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.util.Properties
-import serializers.CallDtoSerializer.CallFormat
-import dto.Call
 
-import scala.collection.JavaConverters._
+import com.typesafe.scalalogging.LazyLogging
+import dto.Call
+import javax.inject.{Inject, Singleton}
+import org.apache.kafka.clients.producer._
+import play.api.Configuration
+import play.api.libs.json.Json
+import serializers.CallSerializer.CallFormat
+
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton

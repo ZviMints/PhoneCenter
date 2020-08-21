@@ -1,8 +1,8 @@
 package serializers
 
-import model.{Event, Status}
-import play.api.libs.json.{Format, Json, OFormat}
 import enumeratum.EnumFormats
+import model.{Event, Status}
+import play.api.libs.json.{Json, OFormat}
 
 object EventSerializer {
   implicit val InstantFormat = CommonSerializers.InstantSerializers.BSONFormat

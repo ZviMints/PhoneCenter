@@ -4,16 +4,21 @@ import java.time.Duration
 import java.util
 import java.util.Properties
 
+import com.typesafe.scalalogging.LazyLogging
 import javax.inject.{Inject, Singleton}
+import model.Call
+import org.apache.kafka.clients.consumer.KafkaConsumer
 import play.api.Configuration
 import play.api.libs.json.Json
+import serializers.CallSerializer.CallFormat
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.collection.JavaConverters._
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionContext) extends LazyLogging {
 
-  val topic = conf.get[String]("callProducer.kafka.topic")
+  val topic = conf.get[String]("CallConsumer.kafka.topic")
 
   def consumeFromKafka(): List[Call] = {
     val props = new Properties()

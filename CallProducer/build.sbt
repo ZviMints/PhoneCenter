@@ -1,6 +1,6 @@
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-name := """CallsProducer"""
+name := """CallProducer"""
 organization := "ariel.university"
 version := "1.0-SNAPSHOT"
 scalaVersion := "2.12.8"
