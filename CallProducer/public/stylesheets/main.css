@@ -1,0 +1,111 @@
+body {
+    font-family: Arial,Verdana,'sans serif';
+    text-align: center;
+    background-image: linear-gradient(to right, #000000, #2a0c12, #4c0816, #6d0012, #8c0000);
+    height: 100vh;
+}
+
+#header {
+    color: #FFFFFF;
+    text-shadow: 4px 3px 0 #000000;
+}
+
+#content {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 35px;
+    background-color: white;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    resize: both;
+    overflow: auto;
+    min-width: 50px; /*suggest a min-width &amp; min-height*/
+    min-height: 50px;
+}
+
+#content #AnswerCall {
+    padding: 10px;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+    margin: 10px;
+}
+#content #AnswerCall:hover {
+    background-color: red; /* Green */
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+table * {
+    position: relative;
+}
+table td, table th {
+    padding-left: 8px;
+}
+table thead tr {
+    height: 60px;
+    background: black;
+}
+table tbody tr {
+    height: 50px;
+}
+table tbody tr:last-child {
+    border: 0;
+}
+table td, table th {
+    text-align: left;
+}
+table td.l, table th.l {
+    text-align: right;
+}
+table td.c, table th.c {
+    text-align: center;
+}
+table td.r, table th.r {
+    text-align: center;
+}
+tbody tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+tbody tr:hover {
+    background: darkred;
+    cursor: pointer;
+}
+
+
+#footer {
+    clear: both;
+    background-color: #f8f8f8;
+    width: 800px;
+    height: 35px;
+    -webkit-border-radius: 4px;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 15px auto 10px;
+}
+#footer .text {
+    float: left;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+#footer .column {
+    float: right;
+    margin-left: 20px;
+    padding: 3px;
+}
+#footer .column img {
+    width: 70px;
+    height: 35px;
+}
