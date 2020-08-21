@@ -20,6 +20,7 @@ class CallProducerController @Inject()(val cc: ControllerComponents,
   }
 
   def send() = Action.async(parse.json) { implicit request =>
+    logger.warn(s"[CallProducerController] - got /send request with request.body = ${request.body}")
     request.body.validate[Call] match {
       case JsSuccess(call, _) => eventDao.insertOne(Event(call)).map(_ => Ok).recover {
         case ex: Exception => handlerError(s"Failure occurred on callDetails with ex: ${ex.getMessage}")

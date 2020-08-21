@@ -40,7 +40,7 @@ class KafkaProduceMonitor @Inject()(eventService: EventService,
   def onCheckInReady() = {
     eventService.fetchByStatus(Ready, lockTTLReady).foreach {
       case Some(event) =>
-        logger.info("[KafkaProduceMonitor] - fetched Ready Event")
+        logger.warn("[KafkaProduceMonitor] - fetched Ready Event")
         eventService.updateStatus(event._id, InProgress).map(_.get)
         self ! CheckInProgress
       case None => logger.debug(s"Not found event for sync or there is already other process inProgress, next check in $TickInterval")
@@ -58,9 +58,9 @@ class KafkaProduceMonitor @Inject()(eventService: EventService,
   def onCheckInProgress() = {
     eventService.fetchByStatus(InProgress, lockTTLInProgress).foreach {
       case Some(event) => {
-        logger.info("[KafkaProduceMonitor] - fetched InProgress Event")
+        logger.warn("[KafkaProduceMonitor] - fetched InProgress Event")
         kafkaService.writeToKafka(event.content)
-        logger.info("Call Successfully sent to Kafka!")
+        logger.warn("Call Successfully sent to Kafka!")
         eventService.syncUpdate(event._id).map(_.get)
         }.recover { case ex: Exception => errorHandler(event, ex, "IN-PROGRESS-GENERAL-ERROR")}
       case None => logger.debug(s"Not found event for sync or there is already other process inProgress, next check in $TickInterval")
