@@ -6,27 +6,29 @@ import metrics.Metrics
 import model.Call
 import play.api.Configuration
 import play.api.cache.AsyncCacheApi
+import play.api.libs.json.Json
 import play.cache.NamedCache
-import services.KafkaService
-
-import scala.concurrent.ExecutionContext
+import services.{DashboardService, KafkaService}
+import serializers.CallSerializer._
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration.FiniteDuration
 
 object KafkaConsumeMonitor {
+
   case object ConsumeFromKafka
+
 }
 
 
 class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
                                     conf: Configuration,
-                                    @NamedCache("CallConsumer") cache: AsyncCacheApi)(implicit val ec: ExecutionContext) extends MonitorActor {
+                                    dashboardService: DashboardService,
+                                    @NamedCache("CallConsumer") cache: AsyncCacheApi)(implicit val ec: ExecutionContext) extends AbstractActor {
 
 
   val expiration: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.cache.expiration")
 
   override protected def InitialDelay: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.consumer-actor.initial_delay")
-
-  override protected def TickInterval: FiniteDuration = conf.get[FiniteDuration]("CallConsumer.consumer-actor.tick_interval")
 
   override protected def onTick(): Unit = {
     self ! ConsumeFromKafka
@@ -39,20 +41,13 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
   override def receive: Receive = myReceive.orElse(super.receive)
 
   def consumeFromKafka() = {
-    kafkaService.consumeFromKafka match {
-      case Nil => { logger.warn("[KafkaConsumeMonitor] - There NO messages available in Kafka") }
-      case calls =>
-        logger.warn(s"[KafkaConsumeMonitor] - consumed messages from Kafka with calls = $calls")
-        calls.map { call =>
-        for {
-          _ <- cache.set("key", call, expiration)
-          _ <- cache.get[Call]("key").map { v =>
-            logger.warn(s"Cache data for key: key, value: $v")
-            Metrics.gotMessageCounter.increment()
-            // _ <- do WS to serviceC that will now make new dashboard or gatherMetrics with dashboardService: DashboardService
-          }
-        } yield ()
-      }
+    Metrics.applicationStartedCounter.increment()
+    kafkaService.consumeFromKafka { (call: Call) => {
+      logger.warn(s"Consumed Call from Kafka: \n ${Json.prettyPrint(Json.toJson(call))}")
+      for {
+        _ <- cache.set("key", call, expiration)
+      } yield dashboardService.update()
+    }
     }
   }
 }

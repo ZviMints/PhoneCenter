@@ -11,7 +11,7 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 
 // Kafka
-libraryDependencies += "org.apache.kafka" %% "kafka" % "2.1.0"
+libraryDependencies += "org.apache.kafka" %% "kafka" % "2.6.0"
 
 // Cache
 libraryDependencies += "com.typesafe.play" %% "play-cache" % "2.7.2"
