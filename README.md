@@ -15,10 +15,10 @@ Department of Computer Science, 2020 <br />
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
 7. **Open the browser and go to the url https://localhost:8080/ and start to answer calls.**
-
+</br>
 <h1>About The Project:</h1>
-We have developed an <strong> asynchronous system </strong> that aims to simulate the architecture of a phone call center:
-<strong>Flow: (CallProducer Service)</strong>
+We have developed an <strong>asynchronous system</strong> that aims to simulate the architecture of a phone call center:</br>
+<strong>Flow: (CallProducer Service)</strong></br>
 1. The user enters a call by clicking the `סיום` button.</br>
 2. The call is sent to route named `/send` which aims to enter the call with the `Ready` status into the database.</br>
 3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid Race Conditions).</br>
