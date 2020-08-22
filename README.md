@@ -19,14 +19,15 @@ Department of Computer Science, 2020 <br />
 <h1>About The Project:</h1>
 We have developed an <strong> asynchronous system </strong> that aims to simulate the architecture of a phone call center:
 <strong>Flow: (CallProducer Service)</strong>
-<p>1. The user enters a call by clicking the `סיום` button.</br>
-2. The call is sent to Route named `/send` which aims to enter the call with the Ready status into the database.</br>
-3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid RaceConditions).</br>
-4. The Actor sends the message to Kafka.</br></p>
+1. The user enters a call by clicking the `סיום` button.</br>
+2. The call is sent to route named `/send` which aims to enter the call with the `Ready` status into the database.</br>
+3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid Race Conditions).</br>
+4. The Actor sends the message to Kafka on topic `callsTopic` which is env variable.</br>
+5. When user press `set` button with new number of waiting calls, a new message send to Kafka with that number on topic `monitorTopic` which is env variable.</br>
 </br>
 <strong>Flow: (CallConsumer Service)</strong>
 <p>1. As soon as the app goes up there is an Actor who wakes up and listens to Kafka.</br>
-2. Once there is a new message, the call is being saved into the Cache (when the Cache is managed by Redis) for 12 hours.</br>
+2. Once there is a new message, the call is being saved into the cache (when the cache is implemented by Redis) for 12 hours.</br>
 3. There is an update of new metrics by Kamon.</br>
 4. There is a send from Kamon to APM Kamon Dashboard which graphically displays the information.</br><p>
 </br>
@@ -34,5 +35,11 @@ We have developed an <strong> asynchronous system </strong> that aims to simulat
 <p><img src="./images/callsView.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard1.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard2.jpeg" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard3" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard4" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard5" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard6" width="750px" height="300px" /></p></br>
+You can select `start time` and `end time` for each metric
+<p><img src="./images/dashboard7" width="750px" height="300px" /></p></br>
 
 
