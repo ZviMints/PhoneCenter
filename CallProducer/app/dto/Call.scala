@@ -6,4 +6,5 @@ case class Call(
                  topic: String,
                  language: String,
                  gender: String,
-                 age: String)
+                 age: String
+                 kind: String)

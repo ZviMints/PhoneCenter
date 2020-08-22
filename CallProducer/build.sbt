@@ -23,6 +23,3 @@ libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 // Json
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.5.12"
 libraryDependencies += "com.beachape" %% "enumeratum-play-json" % "1.5.12"
-
-
-
