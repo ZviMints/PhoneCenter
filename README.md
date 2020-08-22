@@ -1,4 +1,4 @@
-# PhoneCenter <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
+# PhoneCenter *Tabspace* <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
 Phone Center Architecture using Play, Akka, Scala, Kafka, Kamon &amp; Datadog
 <p>Created during the third year at <em>Ariel University</em> in the 
 Department of Computer Science, 2019 <br /> 
@@ -27,8 +27,8 @@ Department of Computer Science, 2019 <br />
 2. open the terminal in this path: "PhoneCenter/CallConsumer/" and enter the commend "sbt runProd" </br>
 3. start the mongodb process.</br>
 4. run the kafka server by those commends:</br>
-       bin/zookeeper-server-start.sh config/zookeeper.properties</br>
-       bin/kafka-server-start.sh config/server.properties</br>
+       *Tabspace* bin/zookeeper-server-start.sh config/zookeeper.properties</br>
+       *Tabspace* bin/kafka-server-start.sh config/server.properties</br>
 5. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.</br>
 6. Open the browser and go to the url "localhost:8080" and start to answer calls.</br>
 
