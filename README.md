@@ -12,6 +12,7 @@ Department of Computer Science, 2020 <br />
 4. run the Kafka server by the following commends:
 
    `bin/zookeeper-server-start.sh config/zookeeper.properties` 
+   
    `bin/kafka-server-start.sh config/server.properties`
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
@@ -40,6 +41,7 @@ We have developed an **asynchronous system** that aims to simulate the architect
 <img src="./images/dashboard3.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard4.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard5.jpeg" width="750px" height="300px" />
+
                    **You can select `start time` and `end time` for each metric**
 <img src="./images/dashboard6.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard7.jpeg" width="750px" height="300px" />
