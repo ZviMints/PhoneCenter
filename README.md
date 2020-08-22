@@ -4,6 +4,18 @@ Phone Center Architecture using Play, Akka, Scala, Kafka, Kamon &amp; Datadog
 Department of Computer Science, 2019 <br /> 
 <strong>Project site:</strong>&nbsp;<a href="https://github.com/ZviMints/PhoneCenter">https://github.com/ZviMints/PhoneCenter</a><br /> 
 <strong>Made by: </strong> <a href="https://github.com/ZviMints">Zvi Mints</a>, and <a href="https://github.com/eilon26">Eilon Tsadok</a></p>
+
+# Run The Project:
+1. Open the terminal in this path: `PhoneCenter/CallProducer/` and run sbt `runProd -Dhttp.port=8080`
+2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt runProd`
+3. Start the MongoDB server.
+4. run the Kafka server by the following commends:
+5. `bin/zookeeper-server-start.sh config/zookeeper.properties`
+6. `bin/kafka-server-start.sh config/server.properties`
+7. Start Redis with Kitematic on `localhost:6379`
+8. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
+9. **Open the browser and go to the url `localhost:8080` and start to answer calls.**
+
 <h1>About The Project:</h1>
 <h2> We have developed an asynchronous system that aims to simulate the architecture of a telephone call center:</h2>
 <strong>Flow: (CallProducer Service)</strong>
@@ -22,18 +34,5 @@ Department of Computer Science, 2019 <br />
 <p><img src="./images/callsView.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard1.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard2.jpeg" width="750px" height="300px" /></p></br>
-<h1>Run The Project:</h1>
-1. open the terminal in this path: "PhoneCenter/CallProducer/" and enter the commend "ssbt runProd -Dhttp.port=8080" </br>
-2. open the terminal in this path: "PhoneCenter/CallConsumer/" and enter the commend "sbt runProd" </br>
-3. start the mongodb process.</br>
-4. run the kafka server by those commends:</br>
-        bin/zookeeper-server-start.sh config/zookeeper.properties</br>
-        bin/kafka-server-start.sh config/server.properties</br>
-5. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.</br>
-6. Open the browser and go to the url "localhost:8080" and start to answer calls.</br>
-
-
-
-
 
 
