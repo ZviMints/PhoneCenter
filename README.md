@@ -6,8 +6,8 @@ Department of Computer Science, 2019 <br />
 <strong>Made by: </strong> <a href="https://github.com/ZviMints">Zvi Mints</a>, and <a href="https://github.com/eilon26">Eilon Tsadok</a></p>
 
 # Run The Project:
-1. Open the terminal in this path: `PhoneCenter/CallProducer/` and run sbt `runProd -Dhttp.port=8080`
-2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt runProd`
+1. Open the terminal in this path: `PhoneCenter/CallProducer/` and run `sbt clean runProd -Dhttp.port=8080`
+2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt clean runProd`
 3. Start the MongoDB server.
 4. run the Kafka server by the following commends:
 5. `bin/zookeeper-server-start.sh config/zookeeper.properties`
