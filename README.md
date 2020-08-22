@@ -19,14 +19,14 @@ Department of Computer Science, 2019 <br />
 <h1>About The Project:</h1>
 <h2> We have developed an asynchronous system that aims to simulate the architecture of a telephone call center:</h2>
 <strong>Flow: (CallProducer Service)</strong>
-<p>1. The user enters a call by clicking the Send button.</br>
+<p>1. The user enters a call by clicking the "סיום" button.</br>
 2. The call is sent to Route named `/ send` which aims to enter the call with the Ready status into the database.</br>
 3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid RaceConditions).</br>
 4. The Actor sends the message to Kafka.</br></p>
 </br>
 <strong>Flow: (CallConsumer Service)</strong>
 <p>1. As soon as the app goes up there is an Actor who wakes up and listens to Kafka.</br>
-2. Once there is a new message, the call is cached (when the Cache is managed by Redis) for 12 hours.</br>
+2. Once there is a new message, the call is being saved into the Cache (when the Cache is managed by Redis) for 12 hours.</br>
 3. There is an update of new metrics by Kamon.</br>
 4. There is a send from Kamon to APM Kamon Dashboard which graphically displays the information.</br><p>
 </br>
