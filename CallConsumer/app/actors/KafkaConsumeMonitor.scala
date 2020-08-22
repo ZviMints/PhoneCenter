@@ -51,7 +51,7 @@ class KafkaConsumeMonitor @Inject()(kafkaService: KafkaService,
     }
     val monitorOperation = (totalWaitingCalls: Int) => {
       logger.warn(s"Consumed totalWaitingCalls Count from Kafka: $totalWaitingCalls")
-      dashboardService.update(totalWaitingCalls)
+      dashboardService.updateWaitingCalls(totalWaitingCalls)
     }
 
     kafkaService.consumeFromKafka(callOperation,monitorOperation)

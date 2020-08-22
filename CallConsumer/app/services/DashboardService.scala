@@ -7,23 +7,28 @@ import model.Call
 import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class DashboardService @Inject()(implicit val ec: ExecutionContext)  {
+
+  // https://apm.kamon.io/ppcqqrtc/qbmsktlq/dashboards/rskpncck?from=1598013660&to=1598019060
+
+  // By CallOperation
   def update(call: Call) = {
     received()
-    balance(true, 1)
+    totalWaitingCalls(false, 1)
     graphByCity(call.city)
     graphByTopic(call.topic)
     graphByGender(call.gender)
     graphByLanguage(call.language)
   }
 
-  def update(totalWaitingCalls: Int) = {
-    balance(false, totalWaitingCalls)
-  }
+  // By monitorOperation
+  def updateWaitingCalls(waitingCalls: Int) = totalWaitingCalls(true, waitingCalls)
+
+  // ================================ Private Methods ==================================== //
 
   // Showing rangeSampler for (+) number of calls that answers and (-) for number of waiting calls
-  private[services] def balance(inc: Boolean, amount: Int) = inc match {
-    case true =>  Metrics.CallsBalanceRangeSampler.increment(amount)
-    case false =>  Metrics.CallsBalanceRangeSampler.decrement(amount)
+  private[services] def totalWaitingCalls(inc: Boolean, amount: Int) = inc match {
+    case true =>  Metrics.TotalWaitingCallsRangeSampler.increment(amount)
+    case false =>  Metrics.TotalWaitingCallsRangeSampler.decrement(amount)
   }
 
   // Showing all the calls that received from kafka

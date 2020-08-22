@@ -5,12 +5,13 @@ import database.EventDao
 import dto.Call
 import javax.inject.{Inject, Singleton}
 import model.Event
-import play.api.libs.json.{JsError, JsSuccess, Json}
+import play.api.libs.json.{Format, JsError, JsSuccess, Json, OFormat}
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import serializers.CallSerializer._
 import services.KafkaService
 
 import scala.concurrent.{ExecutionContext, Future}
+
 @Singleton
 class CallProducerController @Inject()(val cc: ControllerComponents,
                                        kafkaService: KafkaService,
@@ -34,9 +35,17 @@ class CallProducerController @Inject()(val cc: ControllerComponents,
     }
   }
 
-  def totalWaitingCalls(totalWaitingCalls: Int) = Action { implicit request =>
-    logger.warn(s"[CallProducerController] - got /totalWaitingCalls request with CallProducerController = ${totalWaitingCalls}")
-    kafkaService.writeNumberToKafka(totalWaitingCalls)
-    Ok(s"$totalWaitingCalls Monitor count sent to Kafka successfully")
+  def totalWaitingCalls() = Action.async(parse.json) { implicit request =>
+    logger.warn(s"[CallProducerController] - got /totalWaitingCalls request with body = ${request.body}")
+    request.body.validate[MonitorRequest] match {
+      case JsSuccess(monitor, _) => kafkaService.writeNumberToKafka(monitor.totalCalls)
+        Future.successful(Ok)
+      case JsError(error) => Future.successful(BadRequest(Json.toJson("error" -> s"Bad MonitorRequest format: ${error.mkString}")))
+    }
   }
+
+  // ================================ Private Case Class ==================================== //
+  case class MonitorRequest(totalCalls: Int)
+  implicit val MonitorRequestFormat: OFormat[MonitorRequest] = Json.format[MonitorRequest]
+
 }
