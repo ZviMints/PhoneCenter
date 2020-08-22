@@ -14,13 +14,13 @@ Department of Computer Science, 2020 <br />
 &nbsp; `bin/kafka-server-start.sh config/server.properties`
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
-7. **Open the browser and go to the url `https://localhost:8080/` and start to answer calls.**
+7. **Open the browser and go to the url https://localhost:8080/ and start to answer calls.**
 
 <h1>About The Project:</h1>
-<h2> We have developed an asynchronous system that aims to simulate the architecture of a telephone call center:</h2>
+We have developed an <strong> asynchronous system </strong> that aims to simulate the architecture of a phone call center:
 <strong>Flow: (CallProducer Service)</strong>
-<p>1. The user enters a call by clicking the "סיום" button.</br>
-2. The call is sent to Route named `/ send` which aims to enter the call with the Ready status into the database.</br>
+<p>1. The user enters a call by clicking the `סיום` button.</br>
+2. The call is sent to Route named `/send` which aims to enter the call with the Ready status into the database.</br>
 3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid RaceConditions).</br>
 4. The Actor sends the message to Kafka.</br></p>
 </br>
