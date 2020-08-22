@@ -39,10 +39,9 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
         val records = consumer.poll(1000).asScala.toList
         for (data <- records) {
           val value = data.value()
-          data.topic match {
-            case callsTopic => callOperation(Json.parse(value).as[Call])
-            case monitorTopic => monitorOperation(value.toInt)
-          }
+          val topic = data.topic()
+          if(topic.equals(callsTopic)) callOperation(Json.parse(value).as[Call])
+          else if(topic.equals(monitorTopic)) monitorOperation(value.toInt)
         }
       }
     } finally consumer.close()
