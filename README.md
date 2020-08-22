@@ -1,4 +1,4 @@
-# PhoneCenter  <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
+# PhoneCenter &nbsp;&nbsp; <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
 Phone Center Architecture using Play, Akka, Scala, Kafka, Kamon &amp; Datadog
 <p>Created during the third year at <em>Ariel University</em> in the 
 Department of Computer Science, 2019 <br /> 
@@ -10,11 +10,11 @@ Department of Computer Science, 2019 <br />
 2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt clean runProd`
 3. Start the MongoDB server.
 4. run the Kafka server by the following commends:
-5. `bin/zookeeper-server-start.sh config/zookeeper.properties`
-6. `bin/kafka-server-start.sh config/server.properties`
-7. Start Redis with Kitematic on `localhost:6379`
-8. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
-9. **Open the browser and go to the url `localhost:8080` and start to answer calls.**
+&nbsp; `bin/zookeeper-server-start.sh config/zookeeper.properties`
+&nbsp; `bin/kafka-server-start.sh config/server.properties`
+5. Start Redis with Kitematic on `localhost:6379`
+6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
+7. **Open the browser and go to the url `localhost:8080` and start to answer calls.**
 
 <h1>About The Project:</h1>
 <h2> We have developed an asynchronous system that aims to simulate the architecture of a telephone call center:</h2>
