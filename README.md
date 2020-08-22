@@ -19,7 +19,7 @@ Department of Computer Science, 2020 <br />
 <h1>About The Project:</h1>
 We have developed an <strong>asynchronous system</strong> that aims to simulate the architecture of a phone call center:</br>
 <strong>Flow: (CallProducer Service)</strong></br>
-1. The user enters a call by clicking the `סיום` button.</br>
+1. The user enters a call by clicking the `סיום` button.
 2. The call is sent to route named `/send` which aims to enter the call with the `Ready` status into the database.</br>
 3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid Race Conditions).</br>
 4. The Actor sends the message to Kafka on topic `callsTopic` which is env variable.</br>
@@ -31,14 +31,15 @@ We have developed an <strong>asynchronous system</strong> that aims to simulate 
 3. There is an update of new metrics by Kamon.</br>
 4. There is a send from Kamon to APM Kamon Dashboard which graphically displays the information.</br><p>
 </br>
-<p style="text-align: center;"><strong>Below are pictures of the Dashboard: (You can select `start time` and `end time` for each metric)</strong></p>
+<p style="text-align: center;"><strong>Below are pictures of the Dashboard: </strong></p>
 <p><img src="./images/callsView.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard1.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard2.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard3.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard4.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard5.jpeg" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard6.jpeg" width="750px" height="300px" /></p>
+&nbsp; &nbsp; &nbsp; You can select `start time` and `end time` for each metric
+<p><img src="./images/dashboard6.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard7.jpeg" width="750px" height="300px" /></p></br>
 
 
