@@ -1,5 +1,6 @@
 package database
 
+import dto.Call
 import javax.inject.{Inject, Singleton}
 import model.Event
 import play.api.Configuration
@@ -16,6 +17,15 @@ class DBConfig @Inject()(conf: Configuration,
                         (implicit val ec: ExecutionContext) {
   private[database] val eventsCollection = for {
     collection <- mongoApi.database.map(_.collection[JSONCollection](conf.get[String]("mongodb.collections.events")))
+
+    // For Call Id
+    _ <- collection.indexesManager.ensure(
+      Index(Seq(
+        (s"${Call.Id}", IndexType.Ascending)),
+        name = Some("call_id"),
+        background = true,
+        unique = true))
+
     // For fetchByStatus
     _ <- collection.indexesManager.ensure(
       Index(Seq(

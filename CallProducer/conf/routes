@@ -5,5 +5,5 @@ GET         /assets/*file             controllers.Assets.versioned(path="/public
 
 GET         /                         controllers.CallProducerController.index()
 POST        /send                     controllers.CallProducerController.send()
-PUT         /totalWaitingCalls        controllers.CallProducerController.totalWaitingCalls(totalWaitingCalls: Int)
+PUT         /totalWaitingCalls        controllers.CallProducerController.totalWaitingCalls()
 

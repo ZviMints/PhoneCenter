@@ -1,5 +1,6 @@
 package services
 
+import java.lang.Integer
 import java.time.Duration
 import java.util
 import java.util.Properties
@@ -19,9 +20,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionContext) extends LazyLogging {
-  val topic = conf.get[String]("CallConsumer.kafka.topic")
 
-  def consumeFromKafka[T,R](callOperation: Call => Future[T], monitorOperation: Int => R) = {
+  val callsTopic = conf.get[String]("CallConsumer.kafka.callsTopic")
+  val monitorTopic = conf.get[String]("CallConsumer.kafka.monitorTopic")
+
+  def consumeFromKafka[T, R](callOperation: Call => Future[T], monitorOperation: Int => R) = {
     logger.warn("Consuming from Kafka...")
     val props = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
@@ -30,19 +33,15 @@ class KafkaService @Inject()(conf: Configuration)(implicit val ec: ExecutionCont
     props.put("auto.offset.reset", "latest")
     props.put("group.id", "consumer-group-id-unique")
     val consumer: KafkaConsumer[String, String] = new KafkaConsumer[String, String](props)
-    consumer.subscribe(util.Arrays.asList(topic))
+    consumer.subscribe(util.Arrays.asList(callsTopic, monitorTopic))
     try {
       while (true) {
         val records = consumer.poll(1000).asScala.toList
         for (data <- records) {
           val value = data.value()
-          // its not type-safe, just for demo.
-          value match {
-            case _ if value.matches("[+-]?\\d+")  => {
-              val totalWaitingCalls = Integer.parseInt(value)
-              monitorOperation(totalWaitingCalls)
-            }
-            case call => callOperation(Json.parse(call).as[Call])
+          data.topic match {
+            case callsTopic => callOperation(Json.parse(value).as[Call])
+            case monitorTopic => monitorOperation(value.toInt)
           }
         }
       }
