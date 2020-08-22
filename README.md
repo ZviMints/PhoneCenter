@@ -10,8 +10,9 @@ Department of Computer Science, 2020 <br />
 2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt clean runProd`
 3. Start the MongoDB server.
 4. run the Kafka server by the following commends:
-&nbsp; `bin/zookeeper-server-start.sh config/zookeeper.properties` 
-&nbsp; `bin/kafka-server-start.sh config/server.properties`
+
+   `bin/zookeeper-server-start.sh config/zookeeper.properties` 
+   `bin/kafka-server-start.sh config/server.properties`
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
 7. **Open the browser and go to the url https://localhost:8080/ and start to answer calls.**
@@ -39,7 +40,7 @@ We have developed an **asynchronous system** that aims to simulate the architect
 <img src="./images/dashboard3.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard4.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard5.jpeg" width="750px" height="300px" />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **You can select `start time` and `end time` for each metric**
+                   **You can select `start time` and `end time` for each metric**
 <img src="./images/dashboard6.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard7.jpeg" width="750px" height="300px" />
 
