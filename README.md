@@ -38,8 +38,8 @@ We have developed an <strong> asynchronous system </strong> that aims to simulat
 <p><img src="./images/dashboard3" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard4" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard5" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard6" width="750px" height="300px" /></p></br>
-You can select `start time` and `end time` for each metric
+<p><img src="./images/dashboard6" width="750px" height="300px" /></p>
+You can select `start time` and `end time` for each metric</br>
 <p><img src="./images/dashboard7" width="750px" height="300px" /></p></br>
 
 
