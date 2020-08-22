@@ -23,8 +23,7 @@ class DBConfig @Inject()(conf: Configuration,
       Index(Seq(
         (s"${Call.Id}", IndexType.Ascending)),
         name = Some("call_id"),
-        background = true,
-        unique = true))
+        background = true))
 
     // For fetchByStatus
     _ <- collection.indexesManager.ensure(
