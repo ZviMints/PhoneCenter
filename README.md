@@ -1,6 +1,5 @@
-# PhoneCenter
+# PhoneCenter <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
 Phone Center Architecture using Play, Akka, Scala, Kafka, Kamon &amp; Datadog
-<p><img src="./images/phone_center_icon.jpg" /></p>
 <p>Created during the third year at <em>Ariel University</em> in the 
 Department of Computer Science, 2019 <br /> 
 <strong>Project site:</strong>&nbsp;<a href="https://github.com/ZviMints/PhoneCenter">https://github.com/ZviMints/PhoneCenter</a><br /> 
