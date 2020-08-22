@@ -9,8 +9,8 @@ Department of Computer Science, 2019 <br />
 1. Open the terminal in this path: `PhoneCenter/CallProducer/` and run `sbt clean runProd -Dhttp.port=8080`
 2. Open the terminal in this path: `PhoneCenter/CallConsumer/` and run `sbt clean runProd`
 3. Start the MongoDB server.
-4. run the Kafka server by the following commends:
-&nbsp; `bin/zookeeper-server-start.sh config/zookeeper.properties`
+4. run the Kafka server by the following commends:</br>
+&nbsp; `bin/zookeeper-server-start.sh config/zookeeper.properties` </br>
 &nbsp; `bin/kafka-server-start.sh config/server.properties`
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
