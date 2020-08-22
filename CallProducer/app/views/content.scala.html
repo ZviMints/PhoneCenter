@@ -1,18 +1,15 @@
 <html>
     <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <script>
 
-        function sendMessage() {
-            var totalCalls = parseInt(document.getElementById("total").value) || 0;
-
+        function sendTotalWaitingCalls() {
+            var totalCalls = (parseInt(document.getElementById("total").value) || 0)
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", 'http://localhost:8080/totalWaitingCalls ', true);
+            xhr.open("PUT", './totalWaitingCalls ', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({"totalWaitingCalls": totalCalls}));
-            setTimeout(sendMessage, 10000);
-
+            xhr.send(JSON.stringify({"totalCalls": totalCalls}));
         }
+
         </script>
         <script>
         function startConv() {
@@ -49,23 +46,21 @@
         function reportEndCall(row) {
             var message = {};
             message.id = row.cells[0].getElementsByTagName('div')[0].id;
-            message.city = row.cells[1].getElementsByTagName('select')[0].value;
-            message.topic = row.cells[2].getElementsByTagName('select')[0].value;
-            message.language = row.cells[3].getElementsByTagName('select')[0].value;
-            message.gender = row.cells[4].getElementsByTagName('select')[0].value;
-            message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18);
-            message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
-            message.kind = document.getElementById('conv_kind').value;
-    
+            message.totalTime = ((parseInt(Date.now()) - parseInt(message.id)) / 1000).toString(); // seconds
+            message.city = row.cells[1].getElementsByTagName('select')[0].value.toString();
+            message.topic = row.cells[2].getElementsByTagName('select')[0].value.toString();
+            message.language = row.cells[3].getElementsByTagName('select')[0].value.toString();
+            message.gender = row.cells[4].getElementsByTagName('select')[0].value.toString();
+            message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18).toString();
+            message.kind = document.getElementById('conv_kind').value.toString();
+
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", 'http://localhost:8080/send', true);
+            xhr.open("POST", './send', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(message));
-            
+
             deleteRow(row)
         }
-
-
 
         function deleteRow(row) {
             var i = row.rowIndex;
@@ -75,10 +70,10 @@
     </script>
     </head>
 
-    <body onload="initSocket()">
+    <body>
     Total Waiting calls:
         <input type="number" id="total" min="0" max="200" value="0">
-        <input type="button" value="Set" onclick="sendMessage(total.value)" />
+        <input type="button" value="Set" onclick="sendTotalWaitingCalls()" />
         <select id="conv_kind">
             <option value='Emergency'>חירום</option>
             <option value='Emergency Routine'>שגרת חירום</option>
@@ -100,4 +95,3 @@
     </body>
 
 </html>
-
