@@ -28,9 +28,9 @@ Department of Computer Science, 2019 <br />
 <p>1. As soon as the app goes up there is an Actor who wakes up and listens to Kafka.</br>
 2. Once there is a new message, the call is cached (when the Cache is managed by Redis) for 12 hours.</br>
 3. There is an update of new metrics by Kamon.</br>
-4. There is a send from Kamon to APM Kamon which graphically displays the information.</br><p>
+4. There is a send from Kamon to APM Kamon Dashboard which graphically displays the information.</br><p>
 </br>
-<p style="text-align: center;"><strong>Below are pictures of the dashboard:</strong></p>
+<p style="text-align: center;"><strong>Below are pictures of the Dashboard:</strong></p>
 <p><img src="./images/callsView.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard1.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard2.jpeg" width="750px" height="300px" /></p></br>
