@@ -1,7 +1,7 @@
 # PhoneCenter &nbsp;&nbsp; <img src="./images/phone_center_icon.jpg"  width="80px" height="100px"/>
 Phone Center Architecture using Play, Akka, Scala, Kafka, Kamon &amp; Datadog
-<p>Created during the third year at <em>Ariel University</em> in the 
-Department of Computer Science, 2019 <br /> 
+<p>Created during the third year at <strong><em>Ariel University</em></strong> in the 
+Department of Computer Science, 2020 <br /> 
 <strong>Project site:</strong>&nbsp;<a href="https://github.com/ZviMints/PhoneCenter">https://github.com/ZviMints/PhoneCenter</a><br /> 
 <strong>Made by: </strong> <a href="https://github.com/ZviMints">Zvi Mints</a>, and <a href="https://github.com/eilon26">Eilon Tsadok</a></p>
 
@@ -14,7 +14,7 @@ Department of Computer Science, 2019 <br />
 &nbsp; `bin/kafka-server-start.sh config/server.properties`
 5. Start Redis with Kitematic on `localhost:6379`
 6. Open https://apm.kamon.io/demo/demo/dashboards/ to get analytics.
-7. **Open the browser and go to the url `localhost:8080` and start to answer calls.**
+7. **Open the browser and go to the url `https://localhost:8080/` and start to answer calls.**
 
 <h1>About The Project:</h1>
 <h2> We have developed an asynchronous system that aims to simulate the architecture of a telephone call center:</h2>
