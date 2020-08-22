@@ -35,11 +35,11 @@ We have developed an <strong> asynchronous system </strong> that aims to simulat
 <p><img src="./images/callsView.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard1.jpeg" width="750px" height="300px" /></p></br>
 <p><img src="./images/dashboard2.jpeg" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard3" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard4" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard5" width="750px" height="300px" /></p></br>
-<p><img src="./images/dashboard6" width="750px" height="300px" /></p>
+<p><img src="./images/dashboard3.jpeg" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard4.jpeg" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard5.jpeg" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard6.jpeg" width="750px" height="300px" /></p>
 You can select `start time` and `end time` for each metric</br>
-<p><img src="./images/dashboard7" width="750px" height="300px" /></p></br>
+<p><img src="./images/dashboard7.jpeg" width="750px" height="300px" /></p></br>
 
 
