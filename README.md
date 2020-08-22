@@ -42,7 +42,7 @@ We have developed an **asynchronous system** that aims to simulate the architect
 <img src="./images/dashboard4.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard5.jpeg" width="750px" height="300px" />
 
-                   **You can select `start time` and `end time` for each metric**
+   You can select `start time` and `end time` for each metric
 <img src="./images/dashboard6.jpeg" width="750px" height="300px" />
 <img src="./images/dashboard7.jpeg" width="750px" height="300px" />
 
