@@ -22,11 +22,11 @@ Department of Computer Science, 2020 <br />
 We have developed an **asynchronous system** that aims to simulate the architecture of a phone call center:
 
 **Flow: (CallProducer Service)**
-1. The user enters a call by clicking the `סיום` button.
-2. The call is sent to route named `/send` which aims to enter the call with the `Ready` status into the database.
-3. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid Race Conditions).
-4. The Actor sends the message to Kafka on topic `callsTopic` which is env variable.
-5. When user press `set` button with new number of waiting calls, a new message send to Kafka with that number on topic `monitorTopic` which is env variable.
+1. When user press `set` button with new number of waiting calls, The number is sent to route named `/totalWaitingCalls` which aims to send a new message to Kafka with that number on topic `monitorTopic` which is env variable.
+2. The user enters a call by clicking the `סיום` button.
+3. The call is sent to route named `/send` which aims to enter the call with the `Ready` status into MongoDB.
+4. There is Akka's Actor who from time to time gets all the calls with the Ready status and locks them (in order to avoid Race Conditions).
+5. The Actor sends the message to Kafka on topic `callsTopic` which is env variable.
 
 **Flow: (CallConsumer Service)**
 1. As soon as the app goes up there is an Actor who wakes up and listens to Kafka.
